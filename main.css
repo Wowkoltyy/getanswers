@@ -23,6 +23,7 @@ BODY{
     margin-left: auto;
     margin-top: 20px;
     margin-right: auto;
+    resize:none;
 }
 #text::placeholder {
     color: rgba(255,255,255, .5);
