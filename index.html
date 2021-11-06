@@ -31,6 +31,7 @@
                 document.getElementById('info').innerHTML = res;
             } catch(err){
                 console.log(err)
+                if(text.indexOf(`" title="Option Source" epub:type="list">`) != -1){
                 let res = text.substring(text.indexOf(`" title="Option Source" epub:type="list">`)+41, text.indexOf("</ol>", text.indexOf(`" title="Option Source" epub:type="list">`)+41))
 
                 let result = ""
@@ -51,6 +52,7 @@
                 console.log(result)
                 console.log(res)
                 document.getElementById('info').innerHTML = result;
+            }
             }
         }
     </script>
