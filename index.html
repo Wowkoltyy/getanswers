@@ -32,7 +32,25 @@
             } catch(err){
                 console.log(err)
                 let res = text.substring(text.indexOf(`" title="Option Source" epub:type="list">`)+41, text.indexOf("</ol>", text.indexOf(`" title="Option Source" epub:type="list">`)+41))
-                document.getElementById('info').innerHTML = res;
+
+                let result = ""
+                res.split("\n").forEach(element => {
+                        element = element.replace(`<li class="`, "")
+                        element = element.replace("</li>", "")
+                        element = element.replace(">", "")
+                        element = element.replace('"', "")
+                        element = element.replace('"', "")
+                        element = element.replace('"', "")
+                        element = element.replace('"', "")
+                        element = element.replace(/s[0-9][0-9]?[0-9]?[0-9]?/, "")
+                        element = element.replace("g", `Group `)
+                        element = element.replace(/id=g[0-9][0-9]?[0-9]?[0-9]?/, "")
+                        result+=element
+                        result+="<p>"               
+                });
+                console.log(result)
+                console.log(res)
+                document.getElementById('info').innerHTML = result;
             }
         }
     </script>
@@ -42,8 +60,7 @@
     <a id = "copyright">© Created by Wowkolty</a>
     <a id = "help" href="https://guide.digisolver.ga/">Help</a>
 
-    <input id = "text" type="text" placeholder="Введите код фрейма ..." required = ''>
-
+    <textarea id = "text" type="comment" placeholder="Введите код фрейма ..." required = ''></textarea>
     <button id = "getAnswers" OnClick = "getAnswers();">Получить</button>
 
     <div class="separator">
