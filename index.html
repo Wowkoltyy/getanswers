@@ -17,19 +17,21 @@
             try{
                 let res = ""
                 let exercise = 0
-                if(!isNaN(Number(text.substring(text.indexOf(`<div class="question-control" id="question-control`)+50, text.indexOf(`<div class="question-control" id="question-control`)+53)))){ exercise = Number(text.substring(text.indexOf(`<div class="question-control" id="question-control`)+50, text.indexOf(`<div class="question-control" id="question-control`)+53))}
-                else if(!isNaN(Number(text.substring(text.indexOf(`<div class="question-control" id="question-control`)+50, text.indexOf(`<div class="question-control" id="question-control`)+52)))){ exercise = Number(text.substring(text.indexOf(`<div class="question-control" id="question-control`)+50, text.indexOf(`<div class="question-control" id="question-control`)+52))}
-                else { exercise = Number(text.substring(text.indexOf(`<div class="question-control" id="question-control`)+50, text.indexOf(`<div class="question-control" id="question-control`)+51))}
+                if(!isNaN(Number(text.substring(text.indexOf(`<ol class="answer-map" id="answer-map`)+37, text.indexOf(`<ol class="answer-map" id="answer-map`)+40)))){ exercise = Number(text.substring(text.indexOf(`<ol class="answer-map" id="answer-map`)+37, text.indexOf(`<ol class="answer-map" id="answer-map`)+40))}
+                else if(!isNaN(Number(text.substring(text.indexOf(`<ol class="answer-map" id="answer-map`)+37, text.indexOf(`<ol class="answer-map" id="answer-map`)+39)))){ exercise = Number(text.substring(text.indexOf(`<ol class="answer-map" id="answer-map`)+37, text.indexOf(`<ol class="answer-map" id="answer-map`)+39))}
+                else { exercise = Number(text.substring(text.indexOf(`<ol class="answer-map" id="answer-map`)+37, text.indexOf(`<ol class="answer-map" id="answer-map`)+38))}
+                console.log(exercise)
                 while(text.indexOf(`<ol class="answer-map" id="answer-map${exercise}" epub:type="list">`) != -1){
                     
                     res+=text.substring(text.indexOf(`<ol class="answer-map" id="answer-map${exercise}" epub:type="list">`)+`<ol class="answer-map" id="answer-map${exercise}" epub:type="list">`.length,text.indexOf("</ol>",text.indexOf(`<ol class="answer-map" id="answer-map${exercise}" epub:type="list">`)+`<ol class="answer-map" id="answer-map${exercise}" epub:type="list">`.length))
-                    res+="---"
+                    res+="<p>"
                     exercise+=1
                 }
+                if(res.length<1)throw new Error("Ни один ответ не был найден")
                 document.getElementById('info').innerHTML = res;
             } catch(err){
                 console.log(err)
-                let res = "Ошибка. Перепроверьте введенные данные."
+                let res = text.substring(text.indexOf(`" title="Option Source" epub:type="list">`)+41, text.indexOf("</ol>", text.indexOf(`" title="Option Source" epub:type="list">`)+41))
                 document.getElementById('info').innerHTML = res;
             }
         }
@@ -37,7 +39,8 @@
 
 </head>
 <body>
-    <div id = "copyright">© Created by Wowkolty</div>
+    <a id = "copyright">© Created by Wowkolty</a>
+    <a id = "help" href="https://guide.digisolver.ga/">Help</a>
 
     <input id = "text" type="text" placeholder="Введите код фрейма ..." required = ''>
 
