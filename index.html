@@ -15,17 +15,23 @@
 
             let text = document.getElementById('text').value;
             try{
-                let start = text.indexOf(`<ol class="answer-map" id="answer-map5" epub:type="list">`)
-                let end = text.indexOf("</ol>", start)
-                const res = text.substring(start,end)
+                let res = ""
+                let exercise = 0
+                if(!isNaN(Number(text.substring(text.indexOf(`<div class="question-control" id="question-control`)+50, text.indexOf(`<div class="question-control" id="question-control`)+53)))){ exercise = Number(text.substring(text.indexOf(`<div class="question-control" id="question-control`)+50, text.indexOf(`<div class="question-control" id="question-control`)+53))}
+                else if(!isNaN(Number(text.substring(text.indexOf(`<div class="question-control" id="question-control`)+50, text.indexOf(`<div class="question-control" id="question-control`)+52)))){ exercise = Number(text.substring(text.indexOf(`<div class="question-control" id="question-control`)+50, text.indexOf(`<div class="question-control" id="question-control`)+52))}
+                else { exercise = Number(text.substring(text.indexOf(`<div class="question-control" id="question-control`)+50, text.indexOf(`<div class="question-control" id="question-control`)+51))}
+                while(text.indexOf(`<ol class="answer-map" id="answer-map${exercise}" epub:type="list">`) != -1){
+                    
+                    res+=text.substring(text.indexOf(`<ol class="answer-map" id="answer-map${exercise}" epub:type="list">`)+`<ol class="answer-map" id="answer-map${exercise}" epub:type="list">`.length,text.indexOf("</ol>",text.indexOf(`<ol class="answer-map" id="answer-map${exercise}" epub:type="list">`)+`<ol class="answer-map" id="answer-map${exercise}" epub:type="list">`.length))
+                    res+="---"
+                    exercise+=1
+                }
                 document.getElementById('info').innerHTML = res;
             } catch(err){
-                const res = "Ошибка. Перепроверьте введенные данные."
+                console.log(err)
+                let res = "Ошибка. Перепроверьте введенные данные."
                 document.getElementById('info').innerHTML = res;
             }
-
-            
-            console.log(123)
         }
     </script>
 
