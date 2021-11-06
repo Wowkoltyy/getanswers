@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Получение ответов</title>
+
+    <link rel = "icon" type="image/png" href = "/icon.png"> <!-- тут надо поставить иконку -->
+
+    <link rel = "stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <script type="text/javascript">
+
+        function getAnswers() {
+
+            let text = document.getElementById('text').value;
+            try{
+                let start = text.indexOf(`<ol class="answer-map" id="answer-map5" epub:type="list">`)
+                let end = text.indexOf("</ol>", start)
+                const res = text.substring(start,end)
+                document.getElementById('info').innerHTML = res;
+            } catch(err){
+                const res = "Ошибка. Перепроверьте введенные данные."
+                document.getElementById('info').innerHTML = res;
+            }
+
+            
+            console.log(123)
+        }
+    </script>
+
+</head>
+<body>
+    <div id = "copyright">© Created by Wowkolty</div>
+
+    <input id = "text" type="text" placeholder="Введите код фрейма ..." required = ''>
+
+    <button id = "getAnswers" OnClick = "getAnswers();">Получить</button>
+
+    <div class="separator">
+    <span class="separator-text">Результат</span>
+    </div>
+
+    <div id = 'info'></div>
+
+</body>
+</html>
